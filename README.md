@@ -1,127 +1,190 @@
 
 ---
 
-# Estruturas de Dados, Modelagem Matemática e Otimização
+# SIGIC – Sistema Inteligente de Gerenciamento da Infraestrutura da Colônia
 
-## Visão Geral da Contribuição
+## 1. Visão Geral do Projeto
 
-Este módulo do projeto é responsável pela implementação das estruturas de dados em Python, pela modelagem matemática da rede da colônia e pela aplicação de técnicas de otimização de rotas e análise de caminhos dentro do sistema inteligente de gerenciamento.
+O SIGIC (Sistema Inteligente de Gerenciamento da Infraestrutura da Colônia) é um sistema desenvolvido em Python para representar e analisar a infraestrutura de uma colônia baseada em módulos interconectados.
 
----
-
-# Estruturas de Dados em Python
-
-A base do sistema foi construída utilizando estruturas de dados voltadas para representação de grafos, permitindo modelar a rede da colônia de forma eficiente e escalável.
-
-## Estrutura principal utilizada
-
-### Grafo (Lista de Adjacência)
-
-A rede é representada por um dicionário Python, onde:
-
-* Cada nó representa um ponto da colônia
-* Cada aresta representa uma conexão entre pontos
-* Cada conexão possui um peso associado (custo, distância ou prioridade)
-
-Exemplo de estrutura:
-
-```python
-grafo = {
-    "A": [("B", 5), ("C", 2)],
-    "B": [("A", 5), ("D", 3)],
-    "C": [("A", 2)],
-    "D": [("B", 3)]
-}
-```
+O objetivo principal é modelar a rede da colônia como um grafo ponderado, permitindo a análise de conexões, consumo energético, criticidade dos módulos e otimização de rotas utilizando algoritmos de teoria dos grafos.
 
 ---
 
-## Operações implementadas
+## 2. Estrutura da Infraestrutura da Colônia
 
-* Adição de nós na rede
-* Criação de conexões (arestas)
-* Consulta de vizinhos
-* Armazenamento de pesos
-* Navegação pela estrutura
+A colônia é composta por diferentes módulos operacionais:
+
+* Habitação
+* Centro de Controle
+* Armazenamento de Energia
+* Agricultura
+* Laboratório Científico
+* Comunicação
+* Suporte Médico
+* Produção de Oxigênio
+
+Cada módulo possui atributos como:
+
+* Consumo energético (kWh)
+* Prioridade operacional
+* Capacidade de armazenamento
+* Nível de comunicação
+* Status operacional
+* Conexões com outros módulos
 
 ---
 
-# Modelagem Matemática
+## 3. Estruturas de Dados Utilizadas
 
-A rede da colônia foi modelada como um grafo ponderado, onde:
+### 3.1 Dicionários
 
-## Componentes do modelo
+A estrutura principal da colônia é representada por um dicionário Python, onde cada chave representa um módulo e seus atributos.
 
-* Vértices (V): pontos da colônia
-* Arestas (E): conexões entre os pontos
-* Peso (W): custo associado à conexão
+---
 
-Representação formal:
+### 3.2 Listas
 
-```
+Utilizadas para armazenar:
+
+* conexões entre módulos
+* lista de módulos da colônia
+
+---
+
+### 3.3 Tuplas
+
+As conexões são representadas por tuplas no formato:
+
+(módulo_destino, distância)
+
+Exemplo:
+("Centro de controle", 50)
+
+---
+
+### 3.4 Matriz de Adjacência
+
+A rede também é representada por uma matriz de adjacência, onde:
+
+* Linhas representam módulos de origem
+* Colunas representam módulos de destino
+* Valores representam a distância entre os módulos
+
+Isso permite uma segunda forma de análise da rede.
+
+---
+
+## 4. Representação em Grafo
+
+A infraestrutura da colônia é modelada como um grafo ponderado:
+
 G = (V, E, W)
+
+Onde:
+
+* V = conjunto de módulos (vértices)
+* E = conexões entre módulos (arestas)
+* W = peso das conexões (distância em metros)
+
+---
+
+## 5. Algoritmos Implementados
+
+### 5.1 BFS (Busca em Largura)
+
+Utilizado para explorar todos os módulos da colônia de forma nivelada, analisando conectividade geral da rede.
+
+Aplicações:
+
+* análise de alcance da rede
+* verificação de conectividade
+
+---
+
+### 5.2 DFS (Busca em Profundidade)
+
+Utilizado para explorar caminhos profundos da rede, percorrendo conexões de forma recursiva.
+
+Aplicações:
+
+* análise estrutural da rede
+* exploração de caminhos alternativos
+
+---
+
+### 5.3 Dijkstra (Otimização de Rotas)
+
+Utilizado para encontrar o menor caminho entre módulos da colônia.
+
+Aplicações:
+
+* otimização de transmissão de energia
+* redução de custo energético e de comunicação
+
+---
+
+## 6. Modelagem Matemática
+
+Foi implementado um modelo matemático para simular a perda de energia na transmissão entre módulos.
+
+### Fórmula utilizada:
+
+E(d) = E₀ × e^(-0.002 × d)
+
+Onde:
+
+* E(d) = energia recebida
+* E₀ = energia inicial
+* d = distância entre os módulos
+* 0.002 = coeficiente de perda energética
+
+### Análise:
+
+O modelo representa a perda exponencial de energia ao longo da distância, simulando eficiência real de transmissão em redes energéticas.
+
+---
+
+## 7. Otimização da Colônia
+
+A otimização do sistema é realizada através de:
+
+* cálculo de menor caminho (Dijkstra)
+* análise de criticidade dos módulos
+* avaliação de consumo energético
+* exploração da rede (BFS e DFS)
+
+Isso permite identificar rotas mais eficientes e módulos mais críticos para a operação da colônia.
+
+---
+
+## 8. Funcionalidades do Sistema
+
+O sistema possui um menu interativo com as seguintes funções:
+
+* Consultar módulos da colônia
+* Executar modelagem matemática
+* Calcular menor caminho (Dijkstra)
+* Executar BFS (exploração da rede)
+* Executar DFS (exploração profunda)
+
+---
+
+## 9. Arquitetura do Projeto
+
+```
+codigo_fonte.py      → arquivo principal de execução
+src/system.py        → lógica do sistema
+arquivos_auxiliares  → dados adicionais (JSON)
+docs                 → documentação e PDFs
 ```
 
 ---
 
-## Interpretação do problema
+## 10. Conclusão
 
-O sistema simula uma rede onde:
+O SIGIC integra conceitos fundamentais de estruturas de dados, grafos e otimização computacional para simular o gerenciamento inteligente de uma infraestrutura crítica.
 
-* Cada caminho possui um custo associado
-* O objetivo é encontrar trajetos mais eficientes
-* A estrutura permite análise de conectividade
+O sistema permite análise da rede, otimização de caminhos e modelagem matemática aplicada, demonstrando a aplicação prática dos conceitos estudados na disciplina.
 
 ---
-
-# Otimização
-
-A otimização do sistema é aplicada com o objetivo de encontrar o caminho mais eficiente entre dois pontos da rede, reduzindo custo, distância ou tempo de deslocamento.
-
----
-
-## Algoritmo utilizado
-
-Foi aplicado o algoritmo de Dijkstra para encontrar o menor caminho em grafo ponderado.
-
-### Objetivo
-
-Minimizar o custo total entre dois nós da rede.
-
----
-
-## Funcionamento da otimização
-
-1. Inicializa distâncias como infinito
-2. Define nó inicial como zero
-3. Explora vizinhos atualizando menores custos
-4. Seleciona sempre o menor caminho parcial
-5. Retorna o caminho ótimo final
-
----
-
-## Resultado
-
-Com a aplicação da otimização:
-
-* Redução do custo total de deslocamento
-* Melhoria na eficiência da rede
-* Tomada de decisão mais inteligente pelo sistema
-
----
-
-# Arquivo responsável
-
-Esta parte do sistema está implementada principalmente em:
-
-* `src/funcoes_grafo.py`
-
----
-
-# Conclusão
-
-A implementação combina estruturas de dados eficientes (grafos) com modelagem matemática formal, permitindo a aplicação de algoritmos de otimização para resolução de problemas de caminhos mínimos dentro da rede da colônia.
-
----
-
-
