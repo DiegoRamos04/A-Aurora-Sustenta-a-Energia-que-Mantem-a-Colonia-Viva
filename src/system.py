@@ -2,13 +2,13 @@
 # Cada chave é um módulo, contendo seus atributos técnicos e as conexões (arestas) com pesos (distâncias em metros)
 # Nível de prioridade vai de 1 a 5, sendo o nível 1 o mais crítico
 import math
-
+from collections import deque
 
 colonia_aurora_siger = {
     "Habitação": {
         "consumo_energetico_kwh": 120,
-        "prioridade_operacional": 2, 
-        "capacidade_armazenamento": "500 kWh (Baterias de backup) / 1000L Água",
+        "prioridade_operacional": 2,
+        "capacidade_armazenamento": "500 kWh / 1000L Água",
         "necessidade_comunicacao": "Média",
         "status_operacional": "Ativo",
         "conexoes": [("Centro de controle", 50), ("Suporte médico", 20), ("Produção de oxigênio", 80), ("Agricultura", 100)]
@@ -16,23 +16,23 @@ colonia_aurora_siger = {
     "Centro de controle": {
         "consumo_energetico_kwh": 85,
         "prioridade_operacional": 1,
-        "capacidade_armazenamento": "Servidores de Dados (Petabytes) / 200 kWh (Nobreaks)",
+        "capacidade_armazenamento": "Servidores / Nobreaks",
         "necessidade_comunicacao": "Altíssima",
         "status_operacional": "Ativo",
         "conexoes": [("Habitação", 50), ("Comunicação", 30), ("Armazenamento de energia", 150), ("Laboratório científico", 120)]
     },
     "Armazenamento de energia": {
-        "consumo_energetico_kwh": 15, 
+        "consumo_energetico_kwh": 15,
         "prioridade_operacional": 1,
-        "capacidade_armazenamento": "50.000 kWh (BESS e Hidrogênio Verde)",
+        "capacidade_armazenamento": "50.000 kWh",
         "necessidade_comunicacao": "Média",
         "status_operacional": "Ativo",
         "conexoes": [("Centro de controle", 150), ("Produção de oxigênio", 200), ("Agricultura", 300)]
     },
     "Agricultura": {
-        "consumo_energetico_kwh": 250, 
+        "consumo_energetico_kwh": 250,
         "prioridade_operacional": 3,
-        "capacidade_armazenamento": "Estufas / 5000L Água / Biomassa",
+        "capacidade_armazenamento": "Estufas / Água",
         "necessidade_comunicacao": "Baixa",
         "status_operacional": "Ativo",
         "conexoes": [("Habitação", 100), ("Armazenamento de energia", 300), ("Laboratório científico", 60)]
@@ -40,7 +40,7 @@ colonia_aurora_siger = {
     "Laboratório científico": {
         "consumo_energetico_kwh": 180,
         "prioridade_operacional": 4,
-        "capacidade_armazenamento": "Amostras geológicas / Câmaras criogênicas",
+        "capacidade_armazenamento": "Amostras / Equipamentos",
         "necessidade_comunicacao": "Alta",
         "status_operacional": "Ativo",
         "conexoes": [("Centro de controle", 120), ("Agricultura", 60), ("Suporte médico", 90)]
@@ -48,30 +48,28 @@ colonia_aurora_siger = {
     "Comunicação": {
         "consumo_energetico_kwh": 95,
         "prioridade_operacional": 2,
-        "capacidade_armazenamento": "Buffers de transmissão (Terabytes)",
+        "capacidade_armazenamento": "Terabytes",
         "necessidade_comunicacao": "Altíssima",
         "status_operacional": "Ativo",
         "conexoes": [("Centro de controle", 30)]
     },
     "Suporte médico": {
-        "consumo_energetico_kwh": 60, 
+        "consumo_energetico_kwh": 60,
         "prioridade_operacional": 1,
-        "capacidade_armazenamento": "Suprimentos médicos / Oxigênio de emergência",
+        "capacidade_armazenamento": "Suprimentos médicos",
         "necessidade_comunicacao": "Média",
         "status_operacional": "Ativo",
         "conexoes": [("Habitação", 20), ("Laboratório científico", 90)]
     },
     "Produção de oxigênio": {
-        "consumo_energetico_kwh": 300, 
+        "consumo_energetico_kwh": 300,
         "prioridade_operacional": 1,
-        "capacidade_armazenamento": "Tanques de O2 pressurizado (10.000 m³)",
+        "capacidade_armazenamento": "Tanques O2",
         "necessidade_comunicacao": "Baixa",
         "status_operacional": "Ativo",
         "conexoes": [("Habitação", 80), ("Armazenamento de energia", 200)]
     }
 }
-
-
 def exibir_modulo(nome):
 
     modulo = colonia_aurora_siger[nome]
@@ -146,105 +144,111 @@ def consultar_modulos():
                 print("\nOpção inválida.")
 
 
+# MATRIZ DE ADJACÊNCIA
+
+modulos = list(colonia_aurora_siger.keys())
+matriz = [[0 for _ in modulos] for _ in modulos]
+
+for i, origem in enumerate(modulos):
+    for destino, peso in colonia_aurora_siger[origem]["conexoes"]:
+        j = modulos.index(destino)
+        matriz[i][j] = peso
 
 
 
-def calcular_perda_energetica():
+# BFS
+def bfs(inicio):
+    visitados = set()
+    fila = deque([inicio])
 
-    print("\n" + "=" * 60)
-    print("MODELAGEM MATEMÁTICA - PERDA ENERGÉTICA")
-    print("=" * 60)
+    print("\nBFS - Exploração da rede:")
 
-    print("\nFórmula utilizada:")
-    print("E(d) = E₀ × e^(-0,002 × d)\n")
+    while fila:
+        no = fila.popleft()
 
-    print("Onde:")
-    print("E(d) = Energia recebida")
-    print("E₀   = Energia enviada")
-    print("d    = Distância entre os módulos (m)")
-    print("0,002 = Coeficiente de perda energética\n")
+        if no not in visitados:
+            print(no)
+            visitados.add(no)
 
-    energia_inicial = float(input("Energia enviada (kWh): "))
-    distancia = float(input("Distância da transmissão (m): "))
+            for vizinho, _ in colonia_aurora_siger[no]["conexoes"]:
+                if vizinho not in visitados:
+                    fila.append(vizinho)
 
-    energia_recebida = energia_inicial * math.exp(-0.002 * distancia)
 
-    perda = energia_inicial - energia_recebida
+# DFS
+def dfs(no, visitados=None):
+    if visitados is None:
+        visitados = set()
 
-    print("\n" + "=" * 60)
-    print("RESULTADO DA SIMULAÇÃO")
-    print("=" * 60)
+    print(no)
+    visitados.add(no)
 
-    print(f"Energia enviada: {energia_inicial:.2f} kWh")
-    print(f"Distância: {distancia:.2f} m")
-    print(f"Energia recebida: {energia_recebida:.2f} kWh")
-    print(f"Perda energética: {perda:.2f} kWh")
+    for vizinho, _ in colonia_aurora_siger[no]["conexoes"]:
+        if vizinho not in visitados:
+            dfs(vizinho, visitados)
 
-    input("\nPressione ENTER para continuar...")
 
-#print(calcular_perda_energetica())
+# DIJKSTRA
+def dijkstra(inicio):
+    dist = {no: float("inf") for no in colonia_aurora_siger}
+    dist[inicio] = 0
+    visitados = set()
 
-def ranking_criticidade():
+    while len(visitados) < len(colonia_aurora_siger):
+        atual = None
+        menor = float("inf")
 
-    ranking = []
+        for no in dist:
+            if no not in visitados and dist[no] < menor:
+                menor = dist[no]
+                atual = no
 
-    for nome, dados in colonia_aurora_siger.items():
+        if atual is None:
+            break
 
-        consumo = dados["consumo_energetico_kwh"]
-        prioridade = dados["prioridade_operacional"]
+        visitados.add(atual)
 
-        indice = consumo / prioridade
+        for vizinho, peso in colonia_aurora_siger[atual]["conexoes"]:
+            if dist[atual] + peso < dist[vizinho]:
+                dist[vizinho] = dist[atual] + peso
 
-        ranking.append((nome, indice))
+    return dist
 
-    ranking.sort(key=lambda x: x[1], reverse=True)
 
-    print("\n" + "=" * 60)
-    print("OTIMIZAÇÃO - RANKING DE CRITICIDADE")
-    print("=" * 60)
+# MODELAGEM MATEMÁTICA
 
-    print("\nFórmula utilizada:")
-    print("Índice de Criticidade = Consumo Energético ÷ Prioridade Operacional")
+def perda_energetica(E0, d):
+    return E0 * math.exp(-0.002 * d)
 
-    print("\nQuanto MAIOR o índice, mais crítico é o módulo.\n")
 
-    for posicao, (nome, indice) in enumerate(ranking, start=1):
+# FUNÇÕES EXECUTÁVEIS (MENU)
+def executar_modelagem():
+    print("\nModelo: E(d) = E₀ × e^(-0.002 × d)")
 
-        print(f"{posicao}º - {nome}")
-        print(f"Índice de Criticidade: {indice:.2f}\n")
+    E0 = float(input("Energia inicial: "))
+    d = float(input("Distância: "))
 
-    input("Pressione ENTER para continuar...")    
+    resultado = perda_energetica(E0, d)
 
-#print(ranking_criticidade())
+    print(f"Energia final: {resultado:.2f}")
+    input("\nENTER para continuar...")
 
-def estatisticas_colonia():
 
-    total_consumo = 0
+def executar_dijkstra():
+    distancias = dijkstra("Habitação")
 
-    maior_consumo = 0
-    modulo_maior_consumo = ""
+    print("\nDijkstra - Menores caminhos:")
+    for no, valor in distancias.items():
+        print(f"{no}: {valor}")
 
-    for nome, dados in colonia_aurora_siger.items():
+    input("\nENTER para continuar...")
 
-        consumo = dados["consumo_energetico_kwh"]
 
-        total_consumo += consumo
+def executar_bfs():
+    bfs("Habitação")
+    input("\nENTER para continuar...")
 
-        if consumo > maior_consumo:
-            maior_consumo = consumo
-            modulo_maior_consumo = nome
 
-    media_consumo = total_consumo / len(colonia_aurora_siger)
-
-    print("\n" + "=" * 60)
-    print("ESTATÍSTICAS DA COLÔNIA")
-    print("=" * 60)
-
-    print(f"\nConsumo total da colônia: {total_consumo} kWh")
-    print(f"Consumo médio dos módulos: {media_consumo:.2f} kWh")
-    print(f"Módulo com maior consumo: {modulo_maior_consumo}")
-    print(f"Maior consumo registrado: {maior_consumo} kWh")
-
-    input("\nPressione ENTER para continuar...")
-
-#print(estatisticas_colonia())
+def executar_dfs():
+    dfs("Habitação")
+    input("\nENTER para continuar...")
