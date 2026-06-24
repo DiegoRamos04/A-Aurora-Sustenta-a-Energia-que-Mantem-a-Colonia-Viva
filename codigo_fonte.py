@@ -9,7 +9,7 @@ from system import *
 while True:
 
     print("\n" + "=" * 60)
-    print("AURORA - SISTEMA INTELIGENTE DE GERENCIAMENTO")
+    print("SIGIC - SISTEMA INTELIGENTE DE GERENCIAMENTO")
     print("=" * 60)
 
     print("1 - Consultar módulos")
