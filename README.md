@@ -173,11 +173,25 @@ O sistema possui um menu interativo com as seguintes funções:
 ## 9. Arquitetura do Projeto
 
 ```
-codigo_fonte.py      → arquivo principal de execução
-src/system.py        → lógica do sistema
-arquivos_auxiliares  → dados adicionais (JSON)
-docs                 → documentação e PDFs
-```
+
+C:.
+│   .gitignore
+│   codigo_fonte.py
+│   link_video.txt
+│   README.md
+│   
+├───arquivos_auxiliares
+│       dados_colonia.json
+│       
+├───docs
+│       (Colocar arquivos pdf dentro desse docs)
+│       
+└───src
+    │   funcoes_grafo.py
+    │   system.py
+    │   
+    └───__pycache__
+            system.cpython-314.pyc
 
 ---
 
