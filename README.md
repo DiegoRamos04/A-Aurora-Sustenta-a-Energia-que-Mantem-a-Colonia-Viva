@@ -290,3 +290,96 @@ O SIGIC integra conceitos fundamentais de estruturas de dados, grafos e otimiza�
 O sistema permite análise da rede, otimização de caminhos e modelagem matemática aplicada, demonstrando a aplicação prática dos conceitos estudados na disciplina.
 
 ---
+
+# Sustentabilidade e Governança da Infraestrutura
+
+## 1. Introdução
+A sustentabilidade da infraestrutura da Colônia Aurora é um dos pilares fundamentais para garantir a sobrevivência dos habitantes e a continuidade das operações espaciais em longo prazo.
+
+A integração entre monitoramento contínuo, planejamento estratégico e governança tecnológica permite que a colônia opere de maneira eficiente, resiliente e sustentável, minimizando desperdícios e priorizando sistemas essenciais.
+
+## 2. Uso sustentável de Energia
+O gerenciamento energético da colônia é baseado no equilíbrio entre produção, armazenamento e consumo de energia.
+
+O sistema monitora constantemente os recursos disponíveis para evitar desperdícios e garantir a estabilidade operacional.
+
+### Estratégias implementadas
+- Priorizar a utilização de fontes renováveis, como energia solar e eólica;
+- Armazenar o excedente energético em bancos de baterias;
+- Desligar automaticamente sistemas não essenciais em momentos de baixa geração;
+- Redistribuir a energia conforme a demanda dos módulos da colônia;
+- Monitorar indicadores de desempenho energético em tempo real.
+
+Os benefícios incluem redução do desperdício energético, aumento da autonomia operacional, maior estabilidade dos sistemas, menor dependência de fontes emergenciais de energia.
+
+## 3. Expansão Organizada da Colônia
+O crescimento da infraestrutura deve ocorrer de forma planejada, evitando sobrecarga energética e comprometimento das operações.
+
+A expansão será dividida em três fases.
+
+### Fase 1 - Infraestrutura essencial
+
+Implementação dos módulos responsáveis por:
+
+- Habitação;
+- Geração de energia;
+- Comunicação;
+- Suporte à vida.
+
+### Fase 2 - Infraestrutura intermediária
+
+Implementação de:
+
+- Laboratórios científicos;
+- Estufas agrícolas;
+- Centros de manutenção.
+
+### Fase 3 - Infraestrutura avançada
+
+Expansão de:
+
+- Centros de pesquisa;
+- Áreas de armazenamento;
+- Ambientes de desenvolvimento tecnológico.
+
+Antes da instalação de qualquer novo módulo, o sistema realizará uma análise da capacidade energética disponível.
+
+# 4. Governança Tecnológica
+A governança tecnológica estabelece diretrizes para que os sistemas computacionais atuem de forma responsável e segura.
+
+### Princípios adotados
+
+- Transparência das decisões automatizadas;
+- Registro contínuo de eventos;
+- Possibilidade de intervenção humana;
+- Auditoria periódica dos dados;
+- Avaliação de desempenho dos sistemas;
+- Proteção contra ameaças cibernéticas.
+
+Todas as decisões devem priorizar a segurança dos habitantes e a preservação dos recursos disponíveis.
+
+# 5. Redução de Desperdícios
+A eficiência operacional pode ser ampliada por meio da implementação de melhorias contínuas.
+
+### Medidas propostas
+Reaproveitamento da energia excedente;
+- Uso de sensores inteligentes;
+- Manutenção preditiva dos equipamentos;
+- Otimização dos ciclos de carregamento das baterias;
+- Controle automatizado da iluminação;
+- Monitoramento da climatização dos ambientes;
+
+### Resultados esperados
+
+- Redução do consumo desnecessário de energia;
+- Aumento da vida útil dos equipamentos;
+- Diminuição dos custos operacionais;
+- Maior eficiência da infraestrutura.
+
+# 6. Conclusão
+
+A sustentabilidade da Colônia Aurora depende diretamente da integração entre monitoramento inteligente, gestão energética e governança tecnológica.
+
+A adoção de práticas sustentáveis permite que a colônia opere de forma autônoma, segura e eficiente, garantindo a continuidade das atividades científicas e a sobrevivência dos seus habitantes.
+
+O planejamento da expansão, a priorização dos sistemas críticos e a redução dos desperdícios constituem elementos essenciais para a construção de uma infraestrutura preparada para enfrentar os desafios de uma missão espacial de longa duração.
