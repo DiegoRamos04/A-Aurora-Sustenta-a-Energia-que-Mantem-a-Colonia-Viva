@@ -11,27 +11,113 @@ O objetivo principal é modelar a rede da colônia como um grafo ponderado, perm
 
 ---
 
-## 2. Estrutura da Infraestrutura da Colônia
+## 2. Organização da Infraestrutura da Colônia
 
 A colônia é composta por diferentes módulos operacionais:
 
-* Habitação
-* Centro de Controle
-* Armazenamento de Energia
-* Agricultura
-* Laboratório Científico
-* Comunicação
-* Suporte Médico
-* Produção de Oxigênio
+### Habitação
+* Consumo Energético: 120 kWh
 
-Cada módulo possui atributos como:
+* Prioridade Operacional: 2 
 
-* Consumo energético (kWh)
-* Prioridade operacional
-* Capacidade de armazenamento
-* Nível de comunicação
-* Status operacional
-* Conexões com outros módulos
+* Capacidade de Armazenamento: 500 kWh / 1000L Água
+
+* Necessidade de Comunicação: Média
+
+* Status: Ativo
+
+* Conexões: Centro de controle (50m), Suporte médico (20m), Produção de oxigênio (80m), Agricultura (100m)
+
+### Centro de Controle
+* Consumo Energético: 85 kWh
+
+* Prioridade Operacional: 1 (Crítica)
+
+* Capacidade de Armazenamento: Servidores / Nobreaks
+
+* Necessidade de Comunicação: Altíssima
+
+* Status: Ativo
+
+* Conexões: Habitação (50m), Comunicação (30m), Armazenamento de energia (150m), Laboratório científico (120m)
+
+### Armazenamento de Energia
+* Consumo Energético: 15 kWh
+
+* Prioridade Operacional: 1 (Crítica)
+
+* Capacidade de Armazenamento: 50.000 kWh
+
+* Necessidade de Comunicação: Média
+
+* Status: Ativo
+
+* Conexões: Centro de controle (150m), Produção de oxigênio (200m), Agricultura (300m)
+  
+### Agricultura
+* Consumo Energético: 250 kWh
+
+* Prioridade Operacional: 3
+
+* Capacidade de Armazenamento: Estufas / Água
+
+* Necessidade de Comunicação: Baixa
+
+* Status: Ativo
+
+* Conexões: Habitação (100m), Armazenamento de energia (300m), Laboratório científico (60m)
+  
+### Laboratório Científico
+* Consumo Energético: 180 kWh
+
+* Prioridade Operacional: 4
+
+* Capacidade de Armazenamento: Amostras / Câmaras criogênicas
+
+* Necessidade de Comunicação: Alta
+
+* Status: Ativo
+
+* Conexões: Centro de controle (120m), Agricultura (60m), Suporte médico (90m)
+
+### Comunicação
+* Consumo Energético: 95 kWh
+
+* Prioridade Operacional: 2
+
+* Capacidade de Armazenamento: Terabytes
+
+* Necessidade de Comunicação: Altíssima
+
+* Status: Ativo
+
+* Conexões: Centro de controle (30m)
+  
+### Suporte Médico
+* Consumo Energético: 60 kWh
+
+* Prioridade Operacional: 1 (Crítica)
+
+* Capacidade de Armazenamento: Suprimentos médicos
+
+* Necessidade de Comunicação: Média
+
+* Status: Ativo
+
+* Conexões: Habitação (20m), Laboratório científico (90m)
+  
+### Produção de Oxigênio
+* Consumo Energético: 300 kWh
+
+* Prioridade Operacional: 1 (Crítica)
+
+* Capacidade de Armazenamento: Tanques O2
+
+* Necessidade de Comunicação: Baixa
+
+* Status: Ativo
+
+* Conexões: Habitação (80m), Armazenamento de energia (200m)
 
 ---
 
