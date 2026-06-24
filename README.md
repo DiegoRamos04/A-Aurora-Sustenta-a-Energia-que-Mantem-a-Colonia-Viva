@@ -291,95 +291,34 @@ O sistema permite análise da rede, otimização de caminhos e modelagem matemá
 
 ---
 
-# Sustentabilidade e Governança da Infraestrutura
+## 11. Sustentabilidade e Governança da Infraestrutura
+A viabilidade a longo prazo da Colônia Aurora Siger não se sustenta apenas na robustez de sua engenharia física, mas também na aplicação prática dos pilares ESG (Ambiental, Social e Governança) integrados à teoria dos grafos. O SIGIC foi estruturado sob a ótica das Redes Inteligentes (Smart Grids), garantindo que a sobrevivência humana em um ambiente de escassez extrema ocorra com o máximo de eficiência e rastreabilidade.
 
-## 1. Introdução
-A sustentabilidade da infraestrutura da Colônia Aurora é um dos pilares fundamentais para garantir a sobrevivência dos habitantes e a continuidade das operações espaciais em longo prazo.
+### 11.1 Pilar Ambiental: Uso Sustentável e Redução de Perdas
+A arquitetura de rede da colônia foi desenhada visando a redução implacável do desperdício nas linhas de transmissão. O sistema utiliza a modelagem matemática de decaimento exponencial $E(d) = E_0 \times e^{-0.002 \cdot d}$ para calcular as perdas ao longo das distâncias (pesos das arestas).
+Para combater esse desperdício físico:
 
-A integração entre monitoramento contínuo, planejamento estratégico e governança tecnológica permite que a colônia opere de maneira eficiente, resiliente e sustentável, minimizando desperdícios e priorizando sistemas essenciais.
+* Alocação Estratégica: Módulos de alta demanda, como a Produção de Oxigênio (300 kWh) e a Agricultura (250 kWh), possuem arestas calculadas para minimizar o trajeto até os centros de distribuição, reduzindo a dissipação térmica.
 
-## 2. Uso sustentável de Energia
-O gerenciamento energético da colônia é baseado no equilíbrio entre produção, armazenamento e consumo de energia.
+* Armazenamento BESS: A colônia não depende de fontes intermitentes instáveis. O nó central de Armazenamento de Energia, operando com baixo consumo próprio (15 kWh), abriga um robusto sistema BESS (Battery Energy Storage System) de 50.000 kWh. Ele atua como o pulmão da Smart Grid, absorvendo variações de carga e impedindo o desperdício de carga excedente.
 
-O sistema monitora constantemente os recursos disponíveis para evitar desperdícios e garantir a estabilidade operacional.
+### 11.2 Pilar Social: Sobrevivência e Priorização Automatizada
+No contexto espacial, o impacto "Social" se reflete diretamente na garantia da vida humana. A gestão energética não é engessada; ela reage dinamicamente baseada nos algoritmos de busca implementados.
 
-### Estratégias implementadas
-- Priorizar a utilização de fontes renováveis, como energia solar e eólica;
-- Armazenar o excedente energético em bancos de baterias;
-- Desligar automaticamente sistemas não essenciais em momentos de baixa geração;
-- Redistribuir a energia conforme a demanda dos módulos da colônia;
-- Monitorar indicadores de desempenho energético em tempo real.
+Através do atributo "prioridade_operacional" definido na nossa estrutura de dicionários, o algoritmo de otimização (Dijkstra) sabe como agir em cenários de crise:
 
-Os benefícios incluem redução do desperdício energético, aumento da autonomia operacional, maior estabilidade dos sistemas, menor dependência de fontes emergenciais de energia.
+* Em uma falha em cascata, a gestão automatizada corta o roteamento para módulos de suporte secundário, como o Laboratório Científico (Prioridade 4) e a Agricultura (Prioridade 3).
 
-## 3. Expansão Organizada da Colônia
-O crescimento da infraestrutura deve ocorrer de forma planejada, evitando sobrecarga energética e comprometimento das operações.
+* Simultaneamente, o fluxo energético é blindado e redirecionado para os módulos de Prioridade 1 (Centro de Controle, Armazenamento, Suporte Médico e Produção de O2), garantindo que os sistemas de suporte à vida e as comunicações críticas não sofram apagões.
 
-A expansão será dividida em três fases.
+### 11.3 Pilar de Governança: Transparência e Expansão Tecnológica
 
-### Fase 1 - Infraestrutura essencial
+A governança algorítmica exige que os sistemas computacionais não sejam sistemas opacos.
 
-Implementação dos módulos responsáveis por:
+* Rastreabilidade de Fluxo: O uso de algoritmos de percurso (BFS e DFS) permite que qualquer decisão tomada pelo SIGIC seja rastreável. Se houver um gargalo de distribuição na rede, a varredura DFS consegue mapear exatamente qual ramificação da infraestrutura (lista de adjacência) causou a falha, permitindo intervenção humana imediata e precisa.
 
-- Habitação;
-- Geração de energia;
-- Comunicação;
-- Suporte à vida.
+* Crescimento Sustentável: A expansão da Aurora Siger reflete a modularidade do Python. A adição de um novo módulo exige apenas a inserção de uma nova chave no dicionário. Contudo, a gestão automatizada determina que nenhuma expansão física seja acoplada à rede sem que a arquitetura de rede passe antes pelas simulações matemáticas do SIGIC. Isso garante que novos nós não sobrecarreguem o custo de transmissão das arestas já existentes.
 
-### Fase 2 - Infraestrutura intermediária
+## 12. Conclusão Final
 
-Implementação de:
-
-- Laboratórios científicos;
-- Estufas agrícolas;
-- Centros de manutenção.
-
-### Fase 3 - Infraestrutura avançada
-
-Expansão de:
-
-- Centros de pesquisa;
-- Áreas de armazenamento;
-- Ambientes de desenvolvimento tecnológico.
-
-Antes da instalação de qualquer novo módulo, o sistema realizará uma análise da capacidade energética disponível.
-
-# 4. Governança Tecnológica
-A governança tecnológica estabelece diretrizes para que os sistemas computacionais atuem de forma responsável e segura.
-
-### Princípios adotados
-
-- Transparência das decisões automatizadas;
-- Registro contínuo de eventos;
-- Possibilidade de intervenção humana;
-- Auditoria periódica dos dados;
-- Avaliação de desempenho dos sistemas;
-- Proteção contra ameaças cibernéticas.
-
-Todas as decisões devem priorizar a segurança dos habitantes e a preservação dos recursos disponíveis.
-
-# 5. Redução de Desperdícios
-A eficiência operacional pode ser ampliada por meio da implementação de melhorias contínuas.
-
-### Medidas propostas
-Reaproveitamento da energia excedente;
-- Uso de sensores inteligentes;
-- Manutenção preditiva dos equipamentos;
-- Otimização dos ciclos de carregamento das baterias;
-- Controle automatizado da iluminação;
-- Monitoramento da climatização dos ambientes;
-
-### Resultados esperados
-
-- Redução do consumo desnecessário de energia;
-- Aumento da vida útil dos equipamentos;
-- Diminuição dos custos operacionais;
-- Maior eficiência da infraestrutura.
-
-# 6. Conclusão
-
-A sustentabilidade da Colônia Aurora depende diretamente da integração entre monitoramento inteligente, gestão energética e governança tecnológica.
-
-A adoção de práticas sustentáveis permite que a colônia opere de forma autônoma, segura e eficiente, garantindo a continuidade das atividades científicas e a sobrevivência dos seus habitantes.
-
-O planejamento da expansão, a priorização dos sistemas críticos e a redução dos desperdícios constituem elementos essenciais para a construção de uma infraestrutura preparada para enfrentar os desafios de uma missão espacial de longa duração.
+O SIGIC vai além de uma simples representação de dados. Ao unificar Estruturas de Dados em Python (Dicionários, Tuplas e Listas), Algoritmos de Grafos (Dijkstra, BFS, DFS) e Cálculo Diferencial (modelagem de perdas), o sistema entrega uma prova de conceito completa de uma governança espacial autônoma. O projeto demonstra que a sustentabilidade de uma colônia em marte depende de decisões orientadas a dados, evidenciando que a precisão matemática no cálculo das rotas e a redução do desperdício são a verdadeira garantia para a continuidade da missão.
