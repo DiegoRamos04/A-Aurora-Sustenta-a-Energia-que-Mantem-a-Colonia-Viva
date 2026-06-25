@@ -149,30 +149,10 @@ Exemplo:
 
 ---
 
-### 3.4 Matriz de Adjacência
-
-A rede também é representada por uma matriz de adjacência, onde:
-
-* Linhas representam módulos de origem
-* Colunas representam módulos de destino
-* Valores representam a distância entre os módulos
-
-Isso permite uma segunda forma de análise da rede.
-
----
-
 ## 4. Representação em Grafo
 
-A infraestrutura da colônia é modelada como um grafo ponderado:
-
-G = (V, E, W)
-
-Onde:
-
-* V = conjunto de módulos (vértices)
-* E = conexões entre módulos (arestas)
-* W = peso das conexões (distância em metros)
-
+![Diagrama Colonia AURORA-SIGER](arquivos_auxiliares/Colônia-AURORA-SIGER.png)
+*A imagem é desproporcional e meramente ilustrativa*
 ---
 
 ## 5. Algoritmos Implementados
@@ -183,8 +163,7 @@ Utilizado para explorar todos os módulos da colônia de forma nivelada, analisa
 
 Aplicações:
 
-* análise de alcance da rede
-* verificação de conectividade
+* Fazer mapeamento da rede por níveis
 
 ---
 
@@ -194,20 +173,17 @@ Utilizado para explorar caminhos profundos da rede, percorrendo conexões de for
 
 Aplicações:
 
-* análise estrutural da rede
-* exploração de caminhos alternativos
+* Fazer inspeção da infraestrutura da rede
 
 ---
 
 ### 5.3 Dijkstra (Otimização de Rotas)
 
-Utilizado para encontrar o menor caminho entre módulos da colônia.
+Utilizado para encontrar o caminho mais otimizado em relação ao peso
 
 Aplicações:
 
-* otimização de transmissão de energia
-* redução de custo energético e de comunicação
-
+* Busca o caminho mais curto, para uma passagem de energia otimizada
 ---
 
 ## 6. Modelagem Matemática
