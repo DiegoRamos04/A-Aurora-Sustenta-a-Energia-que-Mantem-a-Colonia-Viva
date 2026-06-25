@@ -298,3 +298,7 @@ A governança algorítmica exige que os sistemas computacionais não sejam siste
 ## 12. Conclusão Final
 
 O SIGIC vai além de uma simples representação de dados. Ao unificar Estruturas de Dados em Python (Dicionários, Tuplas e Listas), Algoritmos de Grafos (Dijkstra, BFS, DFS) e Cálculo Diferencial (modelagem de perdas), o sistema entrega uma prova de conceito completa de uma governança espacial autônoma. O projeto demonstra que a sustentabilidade de uma colônia em marte depende de decisões orientadas a dados, evidenciando que a precisão matemática no cálculo das rotas e a redução do desperdício são a verdadeira garantia para a continuidade da missão.
+
+## 13. Demonstração do SIGIC em Funcionamento
+
+[![Assista ao vídeo](https://img.youtube.com/vi/sbAo-NdrKw4/maxresdefault.jpg)](https://youtu.be/sbAo-NdrKw4)
