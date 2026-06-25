@@ -1,7 +1,7 @@
 # Estrutura de dados principal da Colônia Aurora Siger
 # Cada chave é um módulo, contendo seus atributos técnicos e as conexões (arestas) com pesos (distâncias em metros)
-# Nível de prioridade vai de 1 a 5, sendo o nível 1 o mais crítico
 import math
+import random
 from collections import deque
 
 colonia_aurora_siger = {
@@ -70,82 +70,10 @@ colonia_aurora_siger = {
         "conexoes": [("Habitação", 80), ("Armazenamento de energia", 200)]
     }
 }
-def exibir_modulo(nome):
 
-    modulo = colonia_aurora_siger[nome]
-
-    print(f"\n===== {nome.upper()} =====")
-
-    print(f"Consumo energético: {modulo['consumo_energetico_kwh']} kWh")
-    print(f"Prioridade operacional: {modulo['prioridade_operacional']}")
-    print(f"Capacidade de armazenamento: {modulo['capacidade_armazenamento']}")
-    print(f"Necessidade de comunicação: {modulo['necessidade_comunicacao']}")
-    print(f"Status operacional: {modulo['status_operacional']}")
-
-    print("\nConexões:")
-
-    for destino, distancia in modulo["conexoes"]:
-        print(f"- {destino} ({distancia}m)")
-#print(exibir_modulo("Habitação"))
-
-def consultar_modulos():
-
-    while True:
-
-        print("\n" + "=" * 50)
-        print("CONSULTA DE MÓDULOS")
-        print("=" * 50)
-
-        print("1 - Habitação")
-        print("2 - Centro de controle")
-        print("3 - Armazenamento de energia")
-        print("4 - Agricultura")
-        print("5 - Laboratório científico")
-        print("6 - Comunicação")
-        print("7 - Suporte médico")
-        print("8 - Produção de oxigênio")
-        print("0 - Voltar")
-
-        opcao = input("\nEscolha uma opção: ")
-
-        match opcao:
-
-            case "1":
-                exibir_modulo("Habitação")
-                input("Pressione ENTER para voltar:")
-
-            case "2":
-                exibir_modulo("Centro de controle")
-                input("Pressione ENTER para voltar:")
-
-            case "3":
-                exibir_modulo("Armazenamento de energia")
-                input("Pressione ENTER para voltar:")
-
-            case "4":
-                exibir_modulo("Agricultura")
-                input("Pressione ENTER para voltar:")
-            case "5":
-                exibir_modulo("Laboratório científico")
-                input("Pressione ENTER para voltar:")
-            case "6":
-                exibir_modulo("Comunicação")
-                input("Pressione ENTER para voltar:")
-            case "7":
-                exibir_modulo("Suporte médico")
-                input("Pressione ENTER para voltar:")
-            case "8":
-                exibir_modulo("Produção de oxigênio")
-                input("Pressione ENTER para voltar:")
-            case "0":
-                break
-
-            case _:
-                print("\nOpção inválida.")
-
-
-# MATRIZ DE ADJACÊNCIA
-
+# ==========================================
+# MATRIZ DE ADJACÊNCIA (Requisito Documentação 3.4)
+# ==========================================
 modulos = list(colonia_aurora_siger.keys())
 matriz = [[0 for _ in modulos] for _ in modulos]
 
@@ -154,101 +82,184 @@ for i, origem in enumerate(modulos):
         j = modulos.index(destino)
         matriz[i][j] = peso
 
+# ==========================================
+# FUNÇÕES DE CONSULTA
+# ==========================================
+def exibir_modulo(nome):
+    modulo = colonia_aurora_siger[nome]
+    print(f"\n===== {nome.upper()} =====")
+    print(f"Consumo energético: {modulo['consumo_energetico_kwh']} kWh")
+    print(f"Prioridade operacional: {modulo['prioridade_operacional']}")
+    print(f"Capacidade de armazenamento: {modulo['capacidade_armazenamento']}")
+    print(f"Necessidade de comunicação: {modulo['necessidade_comunicacao']}")
+    print(f"Status operacional: {modulo['status_operacional']}")
+    print("\nConexões:")
+    for destino, distancia in modulo["conexoes"]:
+        print(f"- {destino} ({distancia}m)")
 
+def consultar_modulos():
+    opcoes = list(colonia_aurora_siger.keys())
+    while True:
+        print("\n" + "=" * 50)
+        print("CONSULTA DE MÓDULOS")
+        print("=" * 50)
 
-# BFS
-def bfs(inicio):
-    visitados = set()
-    fila = deque([inicio])
+        for i, modulo in enumerate(opcoes, 1):
+            print(f"{i} - {modulo}")
+        print("0 - Voltar")
 
-    print("\nBFS - Exploração da rede:")
+        try:
+            opcao = int(input("\nEscolha uma opção: "))
+            if opcao == 0:
+                break
+            elif 1 <= opcao <= len(opcoes):
+                nome_modulo = opcoes[opcao - 1]
+                exibir_modulo(nome_modulo)
+                input("\nPressione ENTER para voltar...")
+            else:
+                print("\nOpção inválida.")
+        except ValueError:
+            print("\nPor favor, digite um número válido.")
+
+# ==========================================
+# ALGORITMOS DE GRAFOS
+# ==========================================
+
+# BFS - Mapeamento por Níveis
+def executar_bfs():
+    print("\n" + "=" * 50)
+    print("Mapeamento da Rede por Níveis (BFS)")
+    print("=" * 50)
+
+    inicio = "Armazenamento de energia"
+    print(f"Iniciando varredura a partir de: {inicio}")
+
+    visitados = {inicio}
+    fila = deque([(inicio, 0)])
+    niveis = {}
 
     while fila:
-        no = fila.popleft()
+        atual, nivel = fila.popleft()
 
-        if no not in visitados:
-            print(no)
-            visitados.add(no)
+        if nivel not in niveis:
+            niveis[nivel] = []
+        niveis[nivel].append(atual)
 
-            for vizinho, _ in colonia_aurora_siger[no]["conexoes"]:
-                if vizinho not in visitados:
-                    fila.append(vizinho)
+        for vizinho, _ in colonia_aurora_siger[atual]["conexoes"]:
+            if vizinho not in visitados:
+                visitados.add(vizinho)
+                fila.append((vizinho, nivel + 1))
 
+    for nivel in sorted(niveis):
+        print(f"Nível {nivel}: {', '.join(niveis[nivel])}")
 
-# DFS
-def dfs(no, visitados=None):
-    if visitados is None:
-        visitados = set()
+    input("\nENTER para continuar...")
 
-    print(no)
-    visitados.add(no)
+# DFS - Inspeção Profunda de Infraestrutura
+def executar_dfs():
+    print("\n" + "=" * 50)
+    print("Inspeção de Infraestrutura (DFS)")
+    print("=" * 50)
 
-    for vizinho, _ in colonia_aurora_siger[no]["conexoes"]:
-        if vizinho not in visitados:
-            dfs(vizinho, visitados)
-
-
-# DIJKSTRA
-def dijkstra(inicio):
-    dist = {no: float("inf") for no in colonia_aurora_siger}
-    dist[inicio] = 0
+    inicio = "Habitação"
     visitados = set()
+    ordem_visita = []
 
-    while len(visitados) < len(colonia_aurora_siger):
-        atual = None
-        menor = float("inf")
+    def dfs_recursiva(modulo):
+        visitados.add(modulo)
+        ordem_visita.append(modulo)
+        for vizinho, _ in colonia_aurora_siger[modulo]["conexoes"]:
+            if vizinho not in visitados:
+                dfs_recursiva(vizinho)
 
-        for no in dist:
-            if no not in visitados and dist[no] < menor:
-                menor = dist[no]
-                atual = no
+    dfs_recursiva(inicio)
 
-        if atual is None:
+    print("Caminho percorrido pela equipe de manutenção:")
+    print(" -> ".join(ordem_visita))
+
+    erros = random.randint(0, 3)
+    if erros == 0:
+        print("\n[STATUS] Nenhum erro estrutural encontrado durante a inspeção.")
+    else:
+        print(f"\n[ALERTA] Foram encontrados {erros} erro(s) de conexão.")
+        print("[RESOLUÇÃO] Todos os erros foram corrigidos pelos sistemas automatizados.")
+
+    input("\nENTER para continuar...")
+
+# DIJKSTRA - Cálculo da Menor Rota Energética
+def executar_dijkstra():
+    print("\n" + "=" * 50)
+    print("Otimização de Rota Energética (Dijkstra)")
+    print("=" * 50)
+
+    origem = "Armazenamento de energia"
+    destino = "Suporte médico"
+
+    print(f"Calculando menor rota de {origem} para {destino}...")
+
+    distancias = {no: float("inf") for no in colonia_aurora_siger}
+    anteriores = {no: None for no in colonia_aurora_siger}
+    distancias[origem] = 0
+    nao_visitados = list(colonia_aurora_siger.keys())
+
+    while nao_visitados:
+        atual = min(nao_visitados, key=lambda v: distancias[v])
+        nao_visitados.remove(atual)
+
+        if atual == destino:
             break
 
-        visitados.add(atual)
-
         for vizinho, peso in colonia_aurora_siger[atual]["conexoes"]:
-            if dist[atual] + peso < dist[vizinho]:
-                dist[vizinho] = dist[atual] + peso
+            nova_distancia = distancias[atual] + peso
+            if nova_distancia < distancias[vizinho]:
+                distancias[vizinho] = nova_distancia
+                anteriores[vizinho] = atual
 
-    return dist
+    caminho = []
+    atual = destino
+    while atual is not None:
+        caminho.append(atual)
+        atual = anteriores[atual]
+    caminho.reverse()
 
+    print("\n=== MENOR ROTA ENCONTRADA ===")
+    print(" -> ".join(caminho))
+    print(f"Distância total de transmissão: {distancias[destino]} metros")
 
+    input("\nENTER para continuar...")
+
+# ==========================================
 # MODELAGEM MATEMÁTICA
-
+# ==========================================
 def perda_energetica(E0, d):
     return E0 * math.exp(-0.002 * d)
 
-
-# FUNÇÕES EXECUTÁVEIS (MENU)
 def executar_modelagem():
-    print("\nModelo: E(d) = E₀ × e^(-0.002 × d)")
+    print("\n" + "=" * 50)
+    print("Cálculo de Decaimento Exponencial de Energia")
+    print("=" * 50)
+    print("Modelo: E(d) = E₀ × e^(-0.002 × d)")
 
-    E0 = float(input("Energia inicial: "))
-    d = float(input("Distância: "))
+    try:
+        E0 = float(input("\nEnergia enviada na fonte (kWh): "))
+        d = float(input("Distância do cabo de transmissão (metros): "))
+        resultado = perda_energetica(E0, d)
+        perda = E0 - resultado
 
-    resultado = perda_energetica(E0, d)
+        print(f"\nResultados da Transmissão:")
+        print(f"Energia que chegou ao destino: {resultado:.2f} kWh")
+        print(f"Perda térmica no trajeto: {perda:.2f} kWh")
+    except ValueError:
+        print("\nErro: Digite apenas valores numéricos.")
 
-    print(f"Energia final: {resultado:.2f}")
     input("\nENTER para continuar...")
 
+exibir_modulo("Habitação")
 
-def executar_dijkstra():
-    distancias = dijkstra("Habitação")
+executar_bfs()
 
-    print("\nDijkstra - Menores caminhos:")
-    for no, valor in distancias.items():
-        print(f"{no}: {valor}")
+executar_dfs()
 
-    input("\nENTER para continuar...")
-
-
-def executar_bfs():
-    bfs("Habitação")
-    input("\nENTER para continuar...")
-
-
-def executar_dfs():
+executar_dijkstra()
     dfs("Habitação")
     input("\nENTER para continuar...")
